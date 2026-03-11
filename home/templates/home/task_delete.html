@@ -2,13 +2,17 @@
 {% extends "home/main.html" %}
 {% block content %}
 
-<h1>Delete Task</h1>
+<div class="header-bar">
+    <h1>Delete Task</h1>
+</div>
 
-<p>Are you sure to delete the task "{{object}}"</p>
+<p style="margin-left: 15px;">Are you sure to delete the task "{{object}}"</p>
 <form action="" method="post">
     {% csrf_token %}
-    <button><a style="text-decoration: none;" href="{% url 'task_list' %}">CANCEL</a></button>
-    <button type="submit">DELETE</button>
+    <div class="footer-bar">
+        <button><a style="text-decoration: none;" href="{% url 'task_list' %}">CANCEL</a></button>
+        <button type="submit">DELETE</button>
+    </div>
 </form>
 
 
