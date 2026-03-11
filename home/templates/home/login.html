@@ -1,0 +1,38 @@
+{% extends "home/main.html" %} {% block content %}
+
+<div class="header-bar">
+  <h1>Login Form</h1>
+</div>
+
+<div class="card-body">
+  <form action="" method="post">
+    {% csrf_token %} {% if form.errors %}
+    <div>
+      {% for field in form %} {% for error in field.errors %}
+      <p style="color: red">{{ error }}</p>
+      {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+      <p style="color: red">{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p>
+      <label>Username</label>
+      {{ form.username }}
+    </p>
+
+    <p>
+      <label>Password</label>
+      {{ form.password }}
+    </p>
+
+    <button class="btn" type="submit" value="submit">Login</button>
+  </form>
+</div>
+
+<div class="footer-bar">
+  <p>
+    Don't you have an account? <i><a style="color: white;" href="{% url 'register' %}">Register here</a></i>
+  </p>
+</div>
+{% endblock content %}

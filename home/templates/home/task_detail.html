@@ -1,0 +1,24 @@
+
+
+{% extends "home/main.html" %}
+{% block content %}
+
+<div class="header-bar">
+    <h1>Details of the Task</h1>
+</div>
+
+<div class="card-body">
+    <table>
+    <tr><td>{{object.title}}</td></tr>   
+    <tr><td>{{object.description}}</td></tr>
+    <tr><td>{{object.complete}}</td></tr>
+    <tr><td>{{object.created_at}}</td></tr>
+    <tr><td>{{object.user}}</td></tr>
+</table>
+</div>
+
+<div class="footer-bar">
+    <a style="text-decoration: none;" href="{% url 'task_list' %}">Back to the list</a>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends "home/main.html" %} {% block content %}
+
+<div class="header-bar">
+  <div>
+    <h1>Hello {{request.user|title}}</h1>
+    <h3>Plan your work, then work your plan</h3>
+  </div>
+  <div class="temp">
+    {% if request.user.is_authenticated %}
+    <form method="POST" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button class="logout-link" type="submit">Logout</button>
+    </form>
+    {% else %}
+    <a href="{%  url 'login' %}">Login</a>
+    {% endif %}
+  </div>
+</div>
+
+
+
+<div class="task-items-wrapper">
+  {% for task in object_list %}
+
+  <div class="task-wrapper">
+    {% if task.complete %}
+    <div class="task-card">
+      <a href="{% url 'task_toggle' task.pk %}"><div class="task-complete-icon"></div></a>
+      <div class="task-title" >
+        <s>{{task.title|title}}</s>  
+      </div>
+      <a class="icons" id="view" href="{% url 'task_detail' task.pk %}"
+          >&#128065</a>
+      <a class="icons" id="edit"  href="{% url 'task_update' task.pk %}"
+          >&#9998</a
+        >
+        <a class="icons" id="delete"  href="{% url 'task_delete' task.pk %}"
+          >&#215</a
+        >
+    </div>
+    {% else %}
+    <div class="task-card">
+      <a href="{% url 'task_toggle' task.pk %}"><div class="task-incomplete-icon"></div></a>
+      <div class="task-title">
+        {{task.title|title}}  
+      </div>
+      <a class="icons" id="view" href="{% url 'task_detail' task.pk %}"
+          >&#128065</a
+        >
+      <a class="icons" id="edit" href="{% url 'task_update' task.pk %}"
+          >&#9998</a
+        >
+        <a class="icons" id="delete"  href="{% url 'task_delete' task.pk %}"
+          >&#215</a
+        >
+    </div>
+    {%  endif %}
+  </div>
+
+  {% empty %}
+  <div style="margin: 15px;">
+    <h3>No items in list</h3>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="footer-bar">
+    <a class="add-task" style="text-decoration: none" href="{% url 'create_task' %}">Add a task</a>
+</div>
+
+{% endblock content %}
